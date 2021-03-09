@@ -1,14 +1,17 @@
-let preloader = document.getElementById('preloader');
+let preloader = document.getElementById('lds-grid');
+setTimeout(function() {
+	preloader.classList.add('hidden');
+}, 3000);
 
 window.setTimeout(function () {
     let body = document.body;
     let url = 'https://api.github.com/users/EkaterinaMatveeva';
     let date = new Date();
     let getDate = new Promise((resolve, reject) => {
-    setTimeout(() => date ? resolve(date) : reject("Error date!"), 100)
+    setTimeout(() => date ? resolve(date) : reject("Error date!"), 1500)
     });
     let getUrl = new Promise((resolve, reject) => {
-    setTimeout(() => url ? resolve(url) : reject("Error URL!"), 100)
+    setTimeout(() => url ? resolve(url) : reject("Error URL!"), 1500)
     });
 
     Promise.all([getUrl, getDate])
@@ -18,7 +21,7 @@ window.setTimeout(function () {
             let avatar = new Image();
             avatar.src = json.avatar_url;
             body.append(avatar);
-            avatar.classList.add('block');
+            avatar.classList.add('block', 'img');
 
             let br = document.createElement('br');
             body.append(br);
@@ -34,7 +37,7 @@ window.setTimeout(function () {
             name.href = json.html_url;
             name.title = json.login;
             name.innerText = json.login;
-            name.classList.add('block');
+            name.classList.add('block', 'name');
 
             let bio = document.createElement('h4');
             if (json.bio != null) {
