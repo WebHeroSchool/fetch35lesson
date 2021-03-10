@@ -5,7 +5,14 @@ setTimeout(function() {
 
 window.setTimeout(function () {
     let body = document.body;
-    let url = 'https://api.github.com/users/EkaterinaMatveeva';
+
+		let url = window.location.toString();
+    let arr = url.split('=');
+    let userName = arr[1];
+      if (userName == undefined) {
+	      userName = 'EkaterinaMatveeva';
+      }
+    let github = `https://api.github.com/users/${userName}`;
     let date = new Date();
     let getDate = new Promise((resolve, reject) => {
     setTimeout(() => date ? resolve(date) : reject("Error date!"), 1500)
@@ -15,7 +22,7 @@ window.setTimeout(function () {
     });
 
     Promise.all([getUrl, getDate])
-        .then(([url, date]) => fetch(url))
+        .then(([url, date]) => fetch(github))
         .then(res => res.json())
         .then(json => {
             let avatar = new Image();
